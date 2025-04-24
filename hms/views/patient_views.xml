@@ -1,0 +1,40 @@
+<odoo>
+    <data>
+        <!-- Action for patients list -->
+        <record id="action_hms_patient" model="ir.actions.act_window">
+            <field name="name">Patients</field>
+            <field name="res_model">hms.patient</field>
+            <field name="view_mode">tree,form</field> <!-- Added 'tree,form' for both views -->
+            <field name="target">current</field> <!-- Opens in the same window -->
+        </record>
+
+        <!-- Menu item to access patients -->
+        <menuitem id="menu_hms" name="Hospital Management" sequence="1"/>
+        <menuitem id="menu_hms_patients" name="Patients" parent="menu_hms" action="action_hms_patient"/>
+
+        <!-- Patient Form View -->
+        <record id="view_hms_patient_form" model="ir.ui.view">
+            <field name="name">hms.patient.form</field>
+            <field name="model">hms.patient</field>
+            <field name="arch" type="xml">
+                <form string="Patient">
+                    <sheet>
+                        <group>
+                            <field name="first_name"/>
+                            <field name="last_name"/>
+                            <field name="birth_date"/>
+                            <field name="history"/>
+                            <field name="cr_ratio"/>
+                            <field name="blood_type"/>
+                            <field name="pcr"/>
+                            <field name="image"/>
+                            <field name="address"/>
+                            <field name="age"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+    </data>
+</odoo>

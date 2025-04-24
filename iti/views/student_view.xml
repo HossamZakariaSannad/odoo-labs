@@ -1,0 +1,15 @@
+<odoo>
+    <data>
+        <!-- Action for students list -->
+        <record id="action_iti_student" model="ir.actions.act_window">
+            <field name="name">Students</field>
+            <field name="res_model">iti.student</field>
+            <field name="view_mode">tree</field> <!-- Only tree view -->
+            <field name="target">current</field> <!-- Opens in the same window -->
+        </record>
+
+        <!-- Menu item to access students -->
+        <menuitem id="menu_iti" name="ITI Students" sequence="1"/>
+        <menuitem id="menu_iti_students" name="Students" parent="menu_iti" action="action_iti_student"/>
+    </data>
+</odoo>
