@@ -13,39 +13,41 @@
         <menuitem id="menu_hms_patients" name="Patients" parent="menu_hms" action="action_hms_patient"/>
 
         <!-- Patient Form View -->
-        <record id="view_hms_patient_form" model="ir.ui.view">
-            <field name="name">hms.patient.form</field>
-            <field name="model">hms.patient</field>
-            <field name="arch" type="xml">
-                <form string="Patient">
-                    <sheet>
-                        <group>
-                            <field name="first_name"/>
-                            <field name="last_name"/>
-                            <field name="birth_date"/>
-                            <field name="age"/>
-                            
-                            <!-- Field to control visibility of history -->
-                            <field name="show_history" invisible="1"/>
+   <record id="view_hms_patient_form" model="ir.ui.view">
+    <field name="name">hms.patient.form</field>
+    <field name="model">hms.patient</field>
+    <field name="arch" type="xml">
+        <form string="Patient">
+            <sheet>
+                <group>
+                    <field name="first_name"/>
+                    <field name="last_name"/>
+                    <field name="birth_date"/>
+                    <field name="age"/>
+                    
+                    <!-- Field to control visibility of history -->
+                    <field name="show_history" invisible="1"/>
 
-                            <!-- Conditionally render the history field using invisible="True" -->
-                            <field name="history" invisible="[(('show_history', '=', False))]"/>
-                            
-                            <field name="cr_ratio"/>
-                            <field name="blood_type"/>
-                            <field name="pcr"/>
-                            <field name="image"/>
-                            <field name="address"/>
-                        </group>
+                    <field name="history"/>
+                    
+                    <field name="cr_ratio"/>
+                    <field name="blood_type"/>
+                    <field name="pcr"/>
+                    <field name="image"/>
+                    <field name="address"/>
+                </group>
 
-                        <group>
-                            <field name="department_id"/>
-                            <field name="doctor_ids" widget="many2many_tags"/>
-                            <field name="state"/>
-                        </group>
-                    </sheet>
-                </form>
-            </field>
-        </record>
+                <group>
+                    <field name="department_id" domain="[('is_opened', '=', True)]"/>
+
+                    <!-- Disable the doctor field until department is selected -->
+                    <field name="doctor_ids" widget="many2many_tags" domain="[('department_id', '=', department_id)]"
+                        options="{'readonly': [('department_id', '=', False)]}"/>
+                </group>
+            </sheet>
+        </form>
+    </field>
+</record>
+
     </data>
 </odoo>

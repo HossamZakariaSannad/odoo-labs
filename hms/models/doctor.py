@@ -9,7 +9,11 @@ class Doctor(models.Model):
     first_name = fields.Char(required=True)
     last_name = fields.Char(required=True)
     image = fields.Image()
+    
     patients = fields.Many2many('hms.patient')
+
+
+    department_id = fields.Many2one('hms.department', string='Department')
 
     @api.depends('first_name', 'last_name')
     def _compute_full_name(self):
