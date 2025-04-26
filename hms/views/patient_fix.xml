@@ -1,23 +1,22 @@
 <odoo>
     <data>
         <!-- Action for patients list -->
-        <record id="action_hms_patient" model="ir.actions.act_window">
-            <field name="name">Patients</field>
-            <field name="res_model">hms.patient</field>
+        <record id="action_hms_patient_fix" model="ir.actions.act_window">
+            <field name="name">Fixed Patients</field>
+            <field name="res_model">hms.patient.fix</field>
             <field name="view_mode">tree,form</field>
             <field name="target">current</field>
-      
         </record>
 
-        <!-- Menu item to access patients -->
-        <menuitem id="menu_hms" name="Hospital Management" sequence="1"/>
-        <menuitem id="menu_hms_patients" name="Patients" parent="menu_hms" action="action_hms_patient"/>
+        <!-- Menu item to access fixed patients -->
+        <menuitem id="menu_hms_fix" name="Hospital Management Fix" sequence="2"/>
+        <menuitem id="menu_hms_patient_fix" name="Fixed Patients" parent="menu_hms_fix" action="action_hms_patient_fix"/>
 
-        <record id="view_hms_patient_form" model="ir.ui.view">
-            <field name="name">hms.patient.form</field>
-            <field name="model">hms.patient</field>
+        <record id="view_hms_patient_fix_form" model="ir.ui.view">
+            <field name="name">hms.patient.fix.form</field>
+            <field name="model">hms.patient.fix</field>
             <field name="arch" type="xml">
-                <form string="Patient">
+                <form string="Fixed Patient">
                     <sheet>
                         <group>
                             <field name="first_name"/>

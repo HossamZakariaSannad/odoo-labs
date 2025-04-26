@@ -1,0 +1,89 @@
+<odoo>
+    <data>
+        <!-- Patient Log Tree View -->
+        <record id="view_hms_patient_log_tree" model="ir.ui.view">
+            <field name="name">hms.patient.log.tree</field>
+            <field name="model">hms.patient.log</field>
+            <field name="arch" type="xml">
+                <tree string="Patient Logs">
+                    <field name="patient_id"/>
+                    <field name="created_by"/>
+                    <field name="date"/>
+                    <field name="description"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Patient Log Form View -->
+        <record id="view_hms_patient_log_form" model="ir.ui.view">
+            <field name="name">hms.patient.log.form</field>
+            <field name="model">hms.patient.log</field>
+            <field name="arch" type="xml">
+                <form string="Patient Log">
+                    <sheet>
+                        <group>
+                            <field name="patient_id" readonly="1"/>
+                            <field name="created_by" readonly="1"/>
+                            <field name="date" readonly="1"/>
+                            <field name="description"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Action for Patient Logs -->
+        <record id="action_hms_patient_log" model="ir.actions.act_window">
+            <field name="name">Patient Logs</field>
+            <field name="res_model">hms.patient.log</field>
+            <field name="view_mode">tree,form</field>
+            <field name="target">current</field>
+        </record>
+
+        <!-- Menu item for Patient Logs -->
+        <menuitem id="menu_hms_patient_logs" name="Patient Logs" parent="menu_hms" action="action_hms_patient_log" sequence="2"/>
+
+        <!-- Update Patient Form View to Include Logs -->
+        <record id="view_hms_patient_form" model="ir.ui.view">
+            <field name="name">hms.patient.form</field>
+            <field name="model">hms.patient</field>
+            <field name="arch" type="xml">
+                <form string="Patient">
+                    <sheet>
+                        <notebook>
+                            <page string="General Information">
+                                <group>
+                                    <field name="first_name"/>
+                                    <field name="last_name"/>
+                                    <field name="birth_date"/>
+                                    <field name="age"/>
+                                    <field name="show_history" invisible="1"/>
+                                    <field name="history" invisible="not show_history"/>
+                                    <field name="cr_ratio"/>
+                                    <field name="blood_type"/>
+                                    <field name="pcr"/>
+                                    <field name="image"/>
+                                    <field name="address"/>
+                                </group>
+                                <group>
+                                    <field name="department_id" domain="[('is_opened', '=', True)]"/>
+                                    <field name="doctor_ids" widget="many2many_tags" domain="[('department_id', '=', department_id)]"
+                                        options="{'readonly': [('department_id', '=', False)]}"/>
+                                </group>
+                            </page>
+                            <page string="Log History">
+                                <field name="log_ids" widget="one2many_list">
+                                    <tree editable="bottom">
+                                        <field name="created_by"/>
+                                        <field name="date"/>
+                                        <field name="description"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,9 +1,9 @@
 from odoo import models, fields, api
 from odoo.exceptions import ValidationError
 
-class Patient(models.Model):
-    _name = 'hms.patient'
-    _description = 'Patient'
+class PatientFix(models.Model):
+    _name = 'hms.patient.fix'
+    _description = 'Fixed Patient'
     _rec_name = 'full_name'
 
     first_name = fields.Char(string="First Name", required=True)
@@ -72,7 +72,7 @@ class Patient(models.Model):
                 }
 
     def write(self, vals):
-        res = super(Patient, self).write(vals)
+        res = super(PatientFix, self).write(vals)
 
         # Check if the state is being changed
         if 'state' in vals:
