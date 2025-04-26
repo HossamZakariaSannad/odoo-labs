@@ -1,6 +1,5 @@
 from odoo import models, fields, api
 from odoo.exceptions import ValidationError
-
 class Patient(models.Model):
     _name = 'hms.patient'
     _description = 'Patient'
@@ -31,29 +30,25 @@ class Patient(models.Model):
 
     full_name = fields.Char(string="Full Name", compute="_compute_full_name", store=True)
 
-    show_history = fields.Boolean(string="Show History", compute="_compute_show_history", store=True)
+    show_history = fields.Boolean(string="Show History")
 
     @api.depends('first_name', 'last_name')
     def _compute_full_name(self):
-        
         for record in self:
             record.full_name = f"{record.first_name} {record.last_name}"
 
-    @api.depends('age')
-    def _compute_show_history(self):
-        for rec in self:
-            rec.show_history = rec.age >= 50
-
     @api.onchange('age')
     def _onchange_age(self):
-        if self.age < 30:
-            self.pcr = True
-            return {
-                'warning': {
-                    'title': 'PCR Automatically Checked',
-                    'message': 'PCR has been automatically checked because age is below 30.'
+        for rec in self:
+            rec.show_history = rec.age >= 50  # Update visibility
+            if rec.age < 30:
+                rec.pcr = True
+                return {
+                    'warning': {
+                        'title': 'PCR Automatically Checked',
+                        'message': 'PCR has been automatically checked because age is below 30.'
+                    }
                 }
-            }
 
     @api.constrains('pcr', 'cr_ratio')
     def _check_cr_ratio_required(self):

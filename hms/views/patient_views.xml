@@ -24,29 +24,20 @@
                             <field name="last_name"/>
                             <field name="birth_date"/>
                             <field name="age"/>
-                            <!-- <field name="history" attrs="{'invisible': [('age', '<', 50)]}"/> -->
-                            <!-- <field name="history" attrs="{'invisible': [('age', '&lt;', 50)]}"/> -->
-                            <!-- <field name="history" attrs="{'invisible': [('show_history', '=', False)]}"/> -->
-                            <!-- <t t-if="record.show_history.value">
-                                <field name="history"/>
-                            </t> -->
-                                <!-- Make the history field invisible when show_history is False -->
-                            <!-- <field name="history" attrs="{'invisible': [('show_history', '=', False)]}"/> -->
+                            
+                            <!-- Field to control visibility of history -->
+                            <field name="show_history" invisible="1"/>
 
-                           <!-- Hidden boolean field -->
-                            <!-- <field name="show_history" invisible="1"/>
-                             -->
-                            <!-- Conditionally visible field -->
-                            <!-- <field name="history" attrs="{'invisible': [('show_history', '=', False)]}"/>
-                             -->
-                             <!-- Show history field only if show_history is True -->
-                             <field name="history" visible="show_history"/>  
+                            <!-- Conditionally render the history field using invisible="True" -->
+                            <field name="history" invisible="[(('show_history', '=', False))]"/>
+                            
                             <field name="cr_ratio"/>
                             <field name="blood_type"/>
                             <field name="pcr"/>
                             <field name="image"/>
                             <field name="address"/>
                         </group>
+
                         <group>
                             <field name="department_id"/>
                             <field name="doctor_ids" widget="many2many_tags"/>
@@ -56,6 +47,5 @@
                 </form>
             </field>
         </record>
-
     </data>
 </odoo>
