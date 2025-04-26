@@ -4,8 +4,8 @@
         <record id="action_hms_patient" model="ir.actions.act_window">
             <field name="name">Patients</field>
             <field name="res_model">hms.patient</field>
-            <field name="view_mode">tree,form</field> <!-- Added 'tree,form' for both views -->
-            <field name="target">current</field> <!-- Opens in the same window -->
+            <field name="view_mode">tree,form</field>
+            <field name="target">current</field>
         </record>
 
         <!-- Menu item to access patients -->
@@ -23,19 +23,34 @@
                             <field name="first_name"/>
                             <field name="last_name"/>
                             <field name="birth_date"/>
-                            <field name="history"/>
+                            <field name="age"/>
+                            <!-- <field name="history" attrs="{'invisible': [('age', '<', 50)]}"/> -->
+                            <!-- <field name="history" attrs="{'invisible': [('age', '&lt;', 50)]}"/> -->
+                            <!-- <field name="history" attrs="{'invisible': [('show_history', '=', False)]}"/> -->
+                            <!-- <t t-if="record.show_history.value">
+                                <field name="history"/>
+                            </t> -->
+                                <!-- Make the history field invisible when show_history is False -->
+                            <!-- <field name="history" attrs="{'invisible': [('show_history', '=', False)]}"/> -->
+
+                           <!-- Hidden boolean field -->
+                            <!-- <field name="show_history" invisible="1"/>
+                             -->
+                            <!-- Conditionally visible field -->
+                            <!-- <field name="history" attrs="{'invisible': [('show_history', '=', False)]}"/>
+                             -->
+                             <!-- Show history field only if show_history is True -->
+                             <field name="history" visible="show_history"/>  
                             <field name="cr_ratio"/>
                             <field name="blood_type"/>
                             <field name="pcr"/>
                             <field name="image"/>
                             <field name="address"/>
-                            <field name="age"/>
                         </group>
                         <group>
                             <field name="department_id"/>
                             <field name="doctor_ids" widget="many2many_tags"/>
                             <field name="state"/>
-                          
                         </group>
                     </sheet>
                 </form>
