@@ -2,9 +2,14 @@ from odoo import models, fields
 
 class Department(models.Model):
     _name = 'hms.department'
-    _description = 'Hospital Department'
+    _description = 'Department'
 
-    name = fields.Char(required=True)
-    capacity = fields.Integer()
-    is_opened = fields.Boolean(default=True)
-    patients = fields.One2many('hms.patient', 'department_id')
+    name = fields.Char(string="Department Name", required=True)
+    capacity = fields.Integer(string="Capacity")
+    is_opened = fields.Boolean(string="Is Opened")
+    doctor_ids = fields.Many2many(
+        'hms.doctor', 'department_doctor_rel', 'department_id', 'doctor_id', string='Doctors'
+    )
+    patients = fields.One2many(
+        'hms.patient', 'department_id', string='Patients'
+    )

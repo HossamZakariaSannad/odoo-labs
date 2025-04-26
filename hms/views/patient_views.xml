@@ -25,11 +25,12 @@
                     <field name="birth_date"/>
                     <field name="age"/>
                     
-                    <!-- Field to control visibility of history -->
+                   <!-- Hidden helper field -->
                     <field name="show_history" invisible="1"/>
 
-                    <field name="history"/>
-                    
+                    <!-- Use invisible directly with show_history -->
+                    <field name="history" invisible="not show_history"/>
+
                     <field name="cr_ratio"/>
                     <field name="blood_type"/>
                     <field name="pcr"/>
