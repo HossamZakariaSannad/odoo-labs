@@ -6,7 +6,7 @@ class Department(models.Model):
 
     name = fields.Char(string="Department Name", required=True)
     capacity = fields.Integer(string="Capacity")
-    is_opened = fields.Boolean(string="Is Opened")
+    is_opened = fields.Boolean(string="Is Opened", default=False)  # Default value is False
     doctor_ids = fields.Many2many(
         'hms.doctor', 'department_doctor_rel', 'department_id', 'doctor_id', string='Doctors'
     )

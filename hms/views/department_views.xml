@@ -1,22 +1,22 @@
 <odoo>
     <data>
-       <record id="view_department_form" model="ir.ui.view">
-            <field name="name">department.form</field>
-            <field name="model">hms.department</field>
-            <field name="arch" type="xml">
-                <form string="Department">
-                    <sheet>
-                        <group>
-                            <field name="name"/>
-                            <field name="capacity"/>
-                            <field name="is_opened"/>
-                            <!-- Removed the patients field here -->
-                            <field name="doctor_ids" widget="many2many_tags" options="{'no_create': True}"/>
-                        </group>
-                    </sheet>
-                </form>
-            </field>
-        </record>
+    <record id="view_department_form" model="ir.ui.view">
+    <field name="name">department.form</field>
+    <field name="model">hms.department</field>
+    <field name="arch" type="xml">
+        <form string="Department">
+            <sheet>
+                <group>
+                    <field name="name"/>
+                    <field name="capacity"/>
+                    <field name="is_opened"/>
+                    <field name="doctor_ids" widget="many2many_tags" options="{'no_create': True}"/>
+                </group>
+            </sheet>
+        </form>
+    </field>
+</record>
+
 
         <record id="view_department_tree" model="ir.ui.view">
             <field name="name">department.tree</field>
@@ -34,7 +34,7 @@
             <field name="name">Departments</field>
             <field name="res_model">hms.department</field>
             <field name="view_mode">tree,form</field>
-            <field name="domain">[('is_opened', '=', True)]</field>
+            
         </record>
 
         <menuitem id="menu_hms_departments" name="Departments" parent="menu_hms" action="action_hms_department"/>
