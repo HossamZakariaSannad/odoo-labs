@@ -12,6 +12,7 @@
         <menuitem id="menu_hms_fix" name="Hospital Management Fix" sequence="2"/>
         <menuitem id="menu_hms_patient_fix" name="Fixed Patients" parent="menu_hms_fix" action="action_hms_patient_fix"/>
 
+        <!-- Base Patient Form View -->
         <record id="view_hms_patient_fix_form" model="ir.ui.view">
             <field name="name">hms.patient.fix.form</field>
             <field name="model">hms.patient.fix</field>
@@ -30,7 +31,6 @@
                             <field name="pcr"/>
                             <field name="image"/>
                             <field name="address"/>
-                            <!-- Add Email field here -->
                             <field name="email"/>
                         </group>
 
@@ -56,6 +56,30 @@
                         </group>
                     </sheet>
                 </form>
+            </field>
+        </record>
+
+        <!-- View for Manager: Ensure doctor_ids is visible -->
+        <record id="hms_patient_fix_form_view_manager" model="ir.ui.view">
+            <field name="name">hms.patient.fix.form.manager</field>
+            <field name="model">hms.patient.fix</field>
+            <field name="inherit_id" ref="view_hms_patient_fix_form"/>
+            <field name="arch" type="xml">
+                <field name="doctor_ids" position="attributes">
+                    <attribute name="invisible" groups="hms.group_hms_manager">0</attribute>
+                </field>
+            </field>
+        </record>
+
+        <!-- View for User: Hide doctor_ids -->
+        <record id="hms_patient_fix_form_view_user" model="ir.ui.view">
+            <field name="name">hms.patient.fix.form.user</field>
+            <field name="model">hms.patient.fix</field>
+            <field name="inherit_id" ref="view_hms_patient_fix_form"/>
+            <field name="arch" type="xml">
+                <field name="doctor_ids" position="attributes">
+                    <attribute name="invisible" groups="hms.group_hms_user">1</attribute>
+                </field>
             </field>
         </record>
     </data>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Rule for Users: Access only their own patient records -->
+    <record id="hms_patient_fix_user_rule" model="ir.rule">
+        <field name="name">HMS Patient Fix: User Own Records</field>
+        <field name="model_id" ref="model_hms_patient_fix"/>
+        <field name="domain_force">[('create_uid', '=', user.id)]</field>
+        <field name="groups" eval="[(4, ref('hms.group_hms_user'))]"/>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_create" eval="True"/>
+        <field name="perm_unlink" eval="False"/>
+    </record>
+
+    <!-- Rule for Managers: Access all patient records -->
+    <record id="hms_patient_fix_manager_rule" model="ir.rule">
+        <field name="name">HMS Patient Fix: Manager All Records</field>
+        <field name="model_id" ref="model_hms_patient_fix"/>
+        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="groups" eval="[(4, ref('hms.group_hms_manager'))]"/>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_create" eval="True"/>
+        <field name="perm_unlink" eval="True"/>
+    </record>
+</odoo>

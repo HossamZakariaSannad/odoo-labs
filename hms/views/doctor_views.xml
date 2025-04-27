@@ -1,42 +1,46 @@
 <odoo>
     <data>
-      <record id="view_doctor_form" model="ir.ui.view">
-    <field name="name">doctor.form</field>
-    <field name="model">hms.doctor</field>
-    <field name="arch" type="xml">
-        <form string="Doctor">
-            <sheet>
-                <group>
+        <!-- Doctor Form View -->
+        <record id="view_doctor_form" model="ir.ui.view">
+            <field name="name">doctor.form</field>
+            <field name="model">hms.doctor</field>
+            <field name="arch" type="xml">
+                <form string="Doctor">
+                    <sheet>
+                        <group>
+                            <field name="first_name"/>
+                            <field name="last_name"/>
+                            <field name="image"/>
+                            <field name="department_id" domain="[('is_opened', '=', True)]" required="1"/>
+                            <field name="patients"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Doctor Tree View -->
+        <record id="view_doctor_tree" model="ir.ui.view">
+            <field name="name">doctor.tree</field>
+            <field name="model">hms.doctor</field>
+            <field name="arch" type="xml">
+                <tree>
                     <field name="first_name"/>
                     <field name="last_name"/>
-                    <field name="image"/>
-                    <!-- Doctor must belong to a department -->
-                    <field name="department_id" domain="[('is_opened', '=', True)]" required="1"/>
-                    <field name="patients"/>
-                </group>
-            </sheet>
-        </form>
-    </field>
-</record>
+                    <field name="department_id"/>
+                </tree>
+            </field>
+        </record>
 
-        <record id="view_doctor_tree" model="ir.ui.view">
-    <field name="name">doctor.tree</field>
-    <field name="model">hms.doctor</field>
-    <field name="arch" type="xml">
-        <tree>
-            <field name="first_name"/>
-            <field name="last_name"/>
-            <field name="department_id"/>
-        </tree>
-    </field>
-</record>
-
+        <!-- Action for Doctors -->
         <record id="action_hms_doctor" model="ir.actions.act_window">
             <field name="name">Doctors</field>
             <field name="res_model">hms.doctor</field>
             <field name="view_mode">tree,form</field>
         </record>
 
-        <menuitem id="menu_hms_doctors" name="Doctors" parent="menu_hms" action="action_hms_doctor"/>
+        <!-- Menu item for Doctors, restricted to Manager group -->
+        <menuitem id="menu_hms_doctors" name="Doctors" parent="menu_hms_fix" action="action_hms_doctor"
+                  groups="hms.group_hms_manager"/>
     </data>
 </odoo>
