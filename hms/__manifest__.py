@@ -11,6 +11,7 @@
         'views/doctor_views.xml',
         'views/patient_log_views.xml',
         'views/patient_fix.xml',
+        'views/res_partner_views.xml',
     ],
     'installable': True,
     'application': True,

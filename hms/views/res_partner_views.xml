@@ -1,0 +1,35 @@
+<odoo>
+    <data>
+
+        <!-- Inherit the res.partner form view to add Patient Information to Sales & Purchases tab -->
+        <record id="view_partner_form_inherit_patient_fix" model="ir.ui.view">
+            <field name="name">res.partner.form.inherit.patient.fix</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[@name='sales_purchases']" position="inside">
+                    <group string="Patient Information">
+                        <field name="related_patient_fix_id"/>
+                        <field name="related_patient_fix_name" readonly="1"/>
+                        <field name="vat" string="Tax ID"/>
+                        <field name="website" optional="show"/>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- Inherit the res.partner form view to make Tax ID mandatory for CRM Customers -->
+        <record id="view_partner_form_inherit_tax_id_mandatory" model="ir.ui.view">
+            <field name="name">res.partner.form.inherit.tax.id.mandatory</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='vat']" position="attributes">
+                    <attribute name="required">1</attribute>
+                </xpath>
+            </field>
+        </record>
+        
+     
+    </data>
+</odoo>

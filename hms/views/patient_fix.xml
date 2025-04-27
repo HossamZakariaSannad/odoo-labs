@@ -30,6 +30,8 @@
                             <field name="pcr"/>
                             <field name="image"/>
                             <field name="address"/>
+                            <!-- Add Email field here -->
+                            <field name="email"/>
                         </group>
 
                         <group>
